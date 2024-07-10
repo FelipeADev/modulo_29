@@ -64,10 +64,12 @@ public class ProdutoDAO implements IProdutoDAO{
                 String nome = rs.getString("nome");
                 String cd = rs.getString("codigo");
                 Long idC = rs.getLong("id_cliente");
+                Integer pc = rs.getInt("preco");
                 produto.setId(id);
                 produto.setNome(nome);
                 produto.setCodigo(cd);
                 produto.setId_cliente(idC);
+                produto.setPreco(pc);
             }
         } catch(Exception e) {
             throw e;
@@ -112,10 +114,14 @@ public class ProdutoDAO implements IProdutoDAO{
                 String nome = rs.getString("nome");
                 String codigo = rs.getString("codigo");
                 Long id_cliente = rs.getLong("id_cliente");
+                Integer preco = rs.getInt("preco");
+
                 produto.setId(rs.getLong("id"));
                 produto.setCodigo(rs.getString("codigo"));
                 produto.setNome(rs.getString("nome"));
                 produto.setId_cliente(rs.getLong("id_cliente"));
+                produto.setPreco(rs.getInt("preco"));
+
                 list.add(produto);
             }
         } catch (Exception e) {
@@ -146,7 +152,7 @@ public class ProdutoDAO implements IProdutoDAO{
     private String getSqlUpdate() {
         StringBuilder sb = new StringBuilder();
         sb.append("update tb_produto ");
-        sb.append("set nome = ?, codigo = ? ");
+        sb.append("set nome = ?, codigo = ?, preco = ? ");
         sb.append("where id = ?");
         return sb.toString();
     }
@@ -155,19 +161,21 @@ public class ProdutoDAO implements IProdutoDAO{
         stm.setString(1, produto.getNome());
         stm.setString(2, produto.getCodigo());
         stm.setLong(3, produto.getId());
+        stm.setInt(4, produto.getPreco());
     }
 
 
     private String getSqlInsert() {
         StringBuilder sb = new StringBuilder();
-        sb.append("insert into tb_produto (id, codigo, nome) ");
-        sb.append("values (nextval('sq_produto'),?,?)");
+        sb.append("insert into tb_produto (id, codigo, nome, preco) ");
+        sb.append("values (nextval('sq_produto'),?,?,?)");
         return sb.toString();
     }
 
     private void adicionarParametrosInsert(PreparedStatement stm, Produto produto) throws SQLException {
         stm.setString(1, produto.getCodigo());
         stm.setString(2, produto.getNome());
+        stm.setInt(3, produto.getPreco());
     }
 
     private String getSqlDelete() {

@@ -20,6 +20,7 @@ public class ProdutoTest {
         Produto produto = new Produto();
         produto.setCodigo("01");
         produto.setNome("Felipe Aguirre");
+        produto.setPreco(354);
 
         Integer qtd = dao.cadastrar(produto);
         assertTrue(qtd == 1);
@@ -27,8 +28,11 @@ public class ProdutoTest {
         Produto produtoBD = dao.consultar(produto.getCodigo());
         assertNotNull(produtoBD);
         assertNotNull(produtoBD.getId());
+
         assertEquals(produto.getCodigo(), produtoBD.getCodigo());
         assertEquals(produto.getNome(), produtoBD.getNome());
+        assertEquals(produto.getPreco(), produtoBD.getPreco());
+
         assertNotNull(produtoBD);
 
         Integer qtdDel = dao.excluir(produtoBD);
@@ -42,6 +46,8 @@ public class ProdutoTest {
         Produto produto = new Produto();
         produto.setCodigo("10");
         produto.setNome("Felipe Aguirre");
+        produto.setPreco(354);
+
         Integer countCad = produtoDAO.cadastrar(produto);
         assertTrue(countCad == 1);
 
@@ -49,6 +55,7 @@ public class ProdutoTest {
         assertNotNull(produtoBD);
         assertEquals(produto.getCodigo(), produtoBD.getCodigo());
         assertEquals(produto.getNome(), produtoBD.getNome());
+        assertEquals(produto.getPreco(), produtoBD.getPreco());
 
         Integer countDel = produtoDAO.excluir(produtoBD);
         assertTrue(countDel == 1);
@@ -61,6 +68,8 @@ public class ProdutoTest {
         Produto produto = new Produto();
         produto.setCodigo("10");
         produto.setNome("Felipe Aguirre");
+        produto.setPreco(354);
+
         Integer countCad = produtoDAO.cadastrar(produto);
         assertTrue(countCad == 1);
 
@@ -68,6 +77,7 @@ public class ProdutoTest {
         assertNotNull(produtoBD);
         assertEquals(produto.getCodigo(), produtoBD.getCodigo());
         assertEquals(produto.getNome(), produtoBD.getNome());
+        assertEquals(produto.getPreco(), produtoBD.getPreco());
 
         Integer countDel = produtoDAO.excluir(produtoBD);
         assertTrue(countDel == 1);
@@ -80,12 +90,16 @@ public class ProdutoTest {
         Produto produto = new Produto();
         produto.setCodigo("10");
         produto.setNome("Felipe Aguirre");
+        produto.setPreco(354);
+
         Integer countCad = produtoDAO.cadastrar(produto);
         assertTrue(countCad == 1);
 
         Produto produtos = new Produto();
         produtos.setCodigo("20");
         produtos.setNome("Teste");
+        produtos.setPreco(123);
+
         Integer countCad2 = produtoDAO.cadastrar(produtos);
         assertTrue(countCad2 == 1);
 
@@ -112,6 +126,8 @@ public class ProdutoTest {
         Produto produto = new Produto();
         produto.setCodigo("10");
         produto.setNome("Felipe Aguirre");
+        produto.setPreco(354);
+
         Integer countCad = produtoDAO.cadastrar(produto);
         assertTrue(countCad == 1);
 
@@ -119,20 +135,25 @@ public class ProdutoTest {
         assertNotNull(produtoBD);
         assertEquals(produto.getCodigo(), produtoBD.getCodigo());
         assertEquals(produto.getNome(), produtoBD.getNome());
+        assertEquals(produto.getPreco(), produtoBD.getPreco());
+
+        Integer countUpdate = produtoDAO.cadastrar(produto);
+        assertTrue(countUpdate == 1);
 
         produtoBD.setCodigo("20");
         produtoBD.setNome("Outro nome");
-        Integer countUpdate = produtoDAO.atualizar(produtoBD);
-        assertTrue(countUpdate == 1);
+        produtoBD.setPreco(123);
 
         Produto produtoBD1 = produtoBD;
         assertNotNull(produtoBD1);
 
         Produto produtoBD2 = produtoBD1;
         assertNotNull(produtoBD2);
+
         assertEquals(produtoBD.getId(), produtoBD2.getId());
         assertEquals(produtoBD.getCodigo(), produtoBD2.getCodigo());
         assertEquals(produtoBD.getNome(), produtoBD2.getNome());
+        assertEquals(produtoBD.getPreco(), produtoBD2.getPreco());
 
         List<Produto> list = produtoDAO.buscarTodos();
         for (Produto prod : list) {

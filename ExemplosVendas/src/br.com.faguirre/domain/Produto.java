@@ -10,6 +10,8 @@ public class Produto {
 
     private Long id_cliente;
 
+    private Integer preco;
+
     public Long getId() {
         return id;
     }
@@ -40,5 +42,13 @@ public class Produto {
 
     public void setId_cliente(Long id_cliente) {
         this.id_cliente = id_cliente;
+    }
+
+    public Integer getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Integer preco) {
+        this.preco = preco;
     }
 }
